@@ -1,0 +1,31 @@
+@fundboxGreen: #1dbb9b;
+@hoverGreen: #30dcbc;
+@letterGrey: #AFB5B9;
+@titleNavy: #4c5f6f;
+@grey: #e3e5e5;
+
+.icon(@url) {
+    background-image: url(@url);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: @hoverGreen;
+    }
+}
+
+.flex-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

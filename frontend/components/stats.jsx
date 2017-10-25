@@ -17,7 +17,16 @@ export default class Stats extends React.Component {
 
     render() {
         return (
-            <div>see me!!</div>
+            <main>
+                <div className="first"></div>
+                <div className="second"></div>
+                <div className="third"></div>
+                <div className="stats-container">
+                    <div className="mbx-logo"></div>
+                    <div className="graph">some content</div>
+                    <div className="super">even moar!</div>
+                </div>
+            </main>
         )
     }
 }
