@@ -6,6 +6,7 @@ export default class Stats extends React.Component {
     constructor(props) {
         super(props);
         this.injectColors = this.injectColors.bind(this);
+        this.isEnabled = this.isEnabled.bind(this);
         this.colors = ["#1dbb9b","#2F3953","#E56765","#ABD9D2", "#FEF7DC", "#E8B36F"];
         this.state = {
             moodScore: 5.7,
@@ -68,12 +69,22 @@ export default class Stats extends React.Component {
         })
     }
 
+    isEnabled() {
+        if (this.state.moodScore > 0 && this.state.moodScore < 5) {
+            return "active-bad";
+        } else if (this.state.moodScore < 7.5) {
+            return "active-neutral";
+        } else {
+            return "active-good";
+        }
+    }
+
     render() {
         return (
             <main>
-                <div className="first"></div>
-                <div className="second"></div>
-                <div className="third"></div>
+                <div className={"first " + this.isEnabled()}></div>
+                <div className={"second " + this.isEnabled()}></div>
+                <div className={"third " + this.isEnabled()}></div>
                 <div className="stats-container">
                     <div className="mbx-logo"></div>
                     <div className="mbx-score">{this.state.moodScore}</div>

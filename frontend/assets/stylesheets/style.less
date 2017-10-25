@@ -19,24 +19,57 @@
 	  }
 
 	  .first {
-		animation: first 10s infinite;
-		background: linear-gradient(#5ff8ca, #60e08c);
 		z-index: 10;
+
+        &.active-good {
+		  background: linear-gradient( 48deg, #5ff8ca, #60e08c);
+		  //animation: first 10s infinite;
+          animation: animateGradient 5s ease infinite;
+          background-size: 400% 400%;
+          opacity: 1;
+        }
 	  }
 
 	  .second {
-		animation: second 10s infinite; animation-delay: 2s;
-		background: linear-gradient(#19eaa6, #00a1f0);
 		z-index: 20;
+
+        &.active-neutral {
+		  background: linear-gradient(48deg, #19eaa6, #00a1f0);
+          //animation: second 10s infinite; animation-delay: 2s;
+          animation: animateGradient 5s ease infinite;
+          background-size: 400% 400%;
+          opacity: 1;
+        }
 	  }
 
 	  .third {
-		animation: third 10s infinite;
 		animation-delay: 8s;
-		background: linear-gradient(#aab7f8, #ff75c6);
 		z-index: 30;
+
+        &.active-bad {
+		  background: linear-gradient(135deg, #74148D 0%, #8C1D85 16.96%, #BA2D76 48.88%, #FF0065 100%);
+          animation: animateGradient 5s ease infinite;
+          background-size: 400% 400%;
+          opacity: 1;
+        }
 	  }
 	}
+
+    @-webkit-keyframes animateGradient {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
+    @-moz-keyframes animateGradient {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
+    @keyframes animateGradient {
+        0%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0% 50%}
+    }
 
 	@keyframes first {
 	  0% {opacity: 1.0;}
@@ -67,7 +100,18 @@
 	}
 
 	@keyframes third {
-	  0% {opacity: 0;}
+	  //0% {opacity: 0;}
+	  //10% {opacity: 0.2;}
+	  //20% {opacity: 0.4;}
+	  //30% {opacity: 0.6;}
+	  //40% {opacity: 0.8;}
+	  //50% {opacity: 1.0;}
+	  //60% {opacity: 0.8;}
+	  //70% {opacity: 0.6;}
+	  //80% {opacity: 0.4;}
+	  //90% {opacity: 0.2;}
+	  //100% {opacity: 0;}
+      0% {opacity: 0;}
 	  10% {opacity: 0.2;}
 	  20% {opacity: 0.4;}
 	  30% {opacity: 0.6;}
@@ -88,7 +132,7 @@
     }
 
 	.mbx-logo {
-      .icon("../images/logo.png");
+      .icon("../images/logo.svg");
       height: 74px;
       width: 119px;
       margin: 20px;
@@ -99,10 +143,12 @@
       position: absolute;
       bottom: 0;
       font-size: 400px;
+      font-weight: bold;
       text-align: center;
+      line-height: 0.7;
+      letter-spacing: -24px;
       color: @white;
       opacity: 0.3;
-      line-height: 0.7;
     }
 
     .piechart {
@@ -111,6 +157,10 @@
 
       .export-main {
         display: none;
+      }
+
+      tspan {
+        fill: @white;
       }
 
       // Hide stupid self promo crap

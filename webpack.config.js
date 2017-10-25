@@ -41,6 +41,14 @@ module.exports = {
             test: /\.(jpe?g|png|gif|svg)$/i,
             loader: 'file-loader?emitFile=false&name=[path][name].[ext]',
         },
+        {
+            test: /\.(png|svg|woff|woff2)(\?.*)?$/,
+            loader: "url-loader",
+            options: {
+              limit: 10000,
+              name: "assets/[name].[hash:8].[ext]",
+            },
+        },
     ]
   },
   devtool: 'source-maps',
