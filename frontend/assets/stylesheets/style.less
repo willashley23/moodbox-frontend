@@ -23,7 +23,6 @@
 
         &.active-good {
 		  background: linear-gradient( 48deg, #5ff8ca, #60e08c);
-		  //animation: first 10s infinite;
           animation: animateGradient 5s ease infinite;
           background-size: 400% 400%;
           opacity: 1;
@@ -35,7 +34,6 @@
 
         &.active-neutral {
 		  background: linear-gradient(48deg, #19eaa6, #00a1f0);
-          //animation: second 10s infinite; animation-delay: 2s;
           animation: animateGradient 5s ease infinite;
           background-size: 400% 400%;
           opacity: 1;
@@ -159,8 +157,10 @@
         display: none;
       }
 
-      tspan {
-        fill: @white;
+      path {
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       // Hide stupid self promo crap
@@ -205,4 +205,36 @@
       align-self: flex-start;
       position: relative;
       left: 50px;
+    }
+    
+    .feed-container {
+      .flex-row();
+      flex-direction: row;
+      justify-content: space-around;
+      height: 87px;
+
+      .feed-item {
+        display: inherit;
+
+        img {
+          margin-right: 10px;
+        }
+
+        .feed-details {
+          .flex-col();
+          flex-direction: row;
+          font-size: 16px;
+          color: @gray;
+
+          .feed-item-timestamp {
+            font-weight: 900;
+            margin-right: 5px;
+          }
+
+          .feed-item-emotion {
+            font-weight: 100;
+            margin-left: 5px;
+          }
+        }
+      }
     }
