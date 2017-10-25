@@ -17,6 +17,7 @@ export default class Graph extends React.Component {
           "depth3D": 15,
           "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
           "angle": 30,
+           "colorField": "color",
           "export": {
             "enabled": true
           }

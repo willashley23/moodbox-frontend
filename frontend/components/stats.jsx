@@ -5,6 +5,8 @@ export default class Stats extends React.Component {
 
     constructor(props) {
         super(props);
+        this.injectColors = this.injectColors.bind(this);
+        this.colors = ["#1dbb9b","#2F3953","#E56765","#ABD9D2", "#FEF7DC", "#E8B36F"];
         this.state = {
             moodScore: 5.7,
             testSuper: [
@@ -32,19 +34,19 @@ export default class Stats extends React.Component {
             chartData: [
                 {
                     "emotion": "Angry",
-                    "value": 260
+                    "value": 260,
                 },
                 {
                     "emotion": "Disgust",
-                    "value": 201
+                    "value": 201,
                 },
                 {
                     "emotion": "Happy",
-                    "value": 65
+                    "value": 65,
                 },
                 {
                     "emotion": "Neutral",
-                    "value": 39
+                    "value": 39,
                 },
             ],
         };
@@ -56,7 +58,14 @@ export default class Stats extends React.Component {
     }
 
     componentWillMount() {
+        this.injectColors();
+    }
 
+    injectColors() {
+        this.colors.reverse();
+        this.state.chartData.forEach(el => {
+            el.color = this.colors.pop();
+        })
     }
 
     render() {
@@ -68,8 +77,10 @@ export default class Stats extends React.Component {
                 <div className="stats-container">
                     <div className="mbx-logo"></div>
                     <div className="mbx-score">{this.state.moodScore}</div>
-                    <Graph data={this.state.chartData}/>
-                    <Superlatives categories={this.state.testSuper}/>
+                    <div className="data-wrapper">
+                        <Graph data={this.state.chartData}/>
+                        <Superlatives categories={this.state.testSuper}/>
+                    </div>
                 </div>
             </main>
         )
