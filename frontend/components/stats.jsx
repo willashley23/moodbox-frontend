@@ -4,7 +4,9 @@ export default class Stats extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            moodScore: 5.7
+        };
     }
 
     componentDidMount() {
@@ -23,6 +25,7 @@ export default class Stats extends React.Component {
                 <div className="third"></div>
                 <div className="stats-container">
                     <div className="mbx-logo"></div>
+                    <div className="mbx-score">{this.state.moodScore}</div>
                     <div className="graph">some content</div>
                     <div className="super">even moar!</div>
                 </div>

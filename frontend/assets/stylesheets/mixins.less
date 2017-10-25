@@ -3,14 +3,17 @@
 @letterGrey: #AFB5B9;
 @titleNavy: #4c5f6f;
 @grey: #e3e5e5;
+@white: #fff;
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
 
 .icon(@url) {
     background-image: url(@url);
     background-size: cover;
     background-repeat: no-repeat;
-    height: 50px;
-    width: 50px;
-    cursor: pointer;
 
     &:hover {
         background-color: @hoverGreen;
