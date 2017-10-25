@@ -17,9 +17,11 @@ export default class Superlatives extends React.Component {
                 {this.props.categories.map( (category) => {
                     return (
                         <div className="superlative-category">
-                            <div className="superlative-img">{category.img}</div>
-                            <div className="superlative-title">{category.category}</div>
-                            <div className="superlative-name">{category.name}</div>
+                            <img className="superlative-img" src={category.img}></img>
+                            <div className="superlative-details">
+                                <div className="superlative-title">{category.category}</div>
+                                <div className="superlative-name">{category.name}</div>
+                            </div>
                         </div>
                     )
                 })}

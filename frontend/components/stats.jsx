@@ -13,22 +13,22 @@ export default class Stats extends React.Component {
                 {
                     category: "Saddest Fundboxer",
                     name: "Billy Bob",
-                    img: "./idk",
+                    img: "./frontend/assets/images/frown.png",
                 },
                 {
                     category: "Happiest Fundboxer",
                     name: "Jane Plain",
-                    img: "./idk",
+                    img: "./frontend/assets/images/smile.png",
                 },
                 {
                     category: "Angriest Fundboxer",
                     name: "Patty Picky",
-                    img: "./idk",
+                    img: "./frontend/assets/images/frown.png",
                 },
                 {
-                    category: "Most Contemptuous Fundboxer",
+                    category: "Sleepiest Fundboxer",
                     name: "Nelly Negative",
-                    img: "./idk",
+                    img: "./frontend/assets/images/smile.png",
                 },
             ],
             chartData: [
