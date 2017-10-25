@@ -79,6 +79,7 @@ export default class Stats extends React.Component {
                     <div className="mbx-score">{this.state.moodScore}</div>
                     <div className="data-wrapper">
                         <Graph data={this.state.chartData}/>
+                        <div className="vr"></div>
                         <Superlatives categories={this.state.testSuper}/>
                     </div>
                 </div>
