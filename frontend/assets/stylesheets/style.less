@@ -212,17 +212,29 @@
       flex-direction: row;
       justify-content: space-around;
       height: 87px;
+      overflow: scroll;
+
+      button {
+        position: absolute;
+        z-index: 1000;
+        bottom: 10px;
+      }
 
       .feed-item {
         display: inherit;
+        margin-left: 40px;
+        margin-right: 40px;
+        z-index: 1000;
 
+        &:last-child {
+         animation: slideIn 400ms ease-out;
+        }
+        
         img {
           margin-right: 10px;
         }
 
         .feed-details {
-          .flex-col();
-          flex-direction: row;
           font-size: 16px;
           color: @gray;
 
@@ -235,6 +247,72 @@
             font-weight: 100;
             margin-left: 5px;
           }
+
+          .image-wrapper {
+            opacity: 0;
+            position: absolute;
+            bottom: 14px;
+            transform: translateX(-155px);
+            z-index: 1000;
+            border: 4px solid black;
+            height: 500px;
+            transition: all 0.2s ease-in-out;
+
+            &:after,
+            &:before {
+              top: 100%;
+              left: 50%;
+              border: solid transparent;
+              content: " ";
+              height: 0;
+              width: 0;
+              position: absolute;
+              pointer-events: none;
+            }
+
+            &:after {
+              border-color: rgba(136, 183, 213, 0);
+              border-top-color: black;
+              border-width: 30px;
+              margin-left: -30px;
+            }
+
+            &:before {
+              border-color: rgba(194, 225, 245, 0);
+              border-top-color: black;
+              border-width: 26px;
+              margin-left: -26px;
+            }
+
+            .face-tooltip {
+              margin: 0;
+            }
+          }
+
+          .image-link {
+            font-weight: 100;
+            cursor: pointer;
+            text-decoration: underline;
+
+            &:hover {
+              &~.image-wrapper {
+                opacity: 1;
+                bottom: 44px;
+              }
+            }
+          }
         }
+
+        @keyframes slideIn {
+          0% {
+            opacity: 0;
+            transform: translateX(150px)
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0px)
+          }
+        }
+
       }
     }
