@@ -106,7 +106,7 @@ export default class Feed extends React.Component {
             return {
                 emotion: el.emotion,
                 img: el.img,
-                time: d.toLocaleTimeString()
+                time: d.toLocaleTimeString().slice(0,4)
             }
         });
     }
