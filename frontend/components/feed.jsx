@@ -58,7 +58,7 @@ export default class Feed extends React.Component {
             fetch("http://opencv.fbx.im:8080/get_alerts").then(response => {
                 let that = this;
                 response.json().then(data => {
-                    if (that.state.feed.slice(-1)[0].img !== data.slice(-1)[0].img) {
+                    if (that.state.feed.length && that.state.feed.slice(-1)[0].img !== data.slice(-1)[0].img) {
                         data = this.convertDateToString(data);
                         this.setState({
                             feed: this.state.feed.concat(data.slice(-1))

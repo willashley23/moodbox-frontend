@@ -145,7 +145,7 @@
       line-height: 0.7;
       letter-spacing: -24px;
       color: @white;
-      opacity: 0.3;
+      opacity: 0.4;
     }
 
     .piechart {
@@ -195,7 +195,8 @@
     .data-wrapper {
       .flex-row();
       position: relative;
-      bottom: 100px;
+      bottom: 150px;
+      right: 60px;
     }
 
     .vr {
@@ -214,7 +215,6 @@
       justify-content: space-around;
       height: 87px;
       overflow: scroll;
-
       button {
         position: absolute;
         z-index: 1000;
@@ -322,3 +322,9 @@
 
       }
     }
+
+
+      ::-webkit-scrollbar {
+          width: 0px;
+          background: transparent; /* make scrollbar transparent */
+      }

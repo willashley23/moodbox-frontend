@@ -21,7 +21,6 @@ export default class Graph extends React.Component {
         })
     }
 
-
     generateGraph(data) {
         let sanitizedData = Object.keys(data).map(key => {
             return {
