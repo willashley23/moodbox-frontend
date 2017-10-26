@@ -84,7 +84,6 @@ export default class Feed extends React.Component {
                 return "./frontend/assets/images/sadness.svg";
             case "surprise":
                 return "./frontend/assets/images/surprise.svg";
-
         }
     }
 
