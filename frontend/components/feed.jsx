@@ -9,49 +9,62 @@ export default class Feed extends React.Component {
         this.determineEmotionIcon = this.determineEmotionIcon.bind(this);
         this.convertDateToString = this.convertDateToString.bind(this);
         this.state = {
-            feed: [
-                {
-                    time: "11:55",
-                    emotion: "anger",
-                    img: "tbd",
-                },
-                {
-                    time: "11:55",
-                    emotion: "fear",
-                    img: "tbd",
-                },
-                {
-                    time: "11:55",
-                    emotion: "contempt",
-                    img: "tbd",
-                },
-                {
-                    time: "11:55",
-                    emotion: "disgust",
-                    img: "tbd",
-                },
-                {
-                    time: "11:55",
-                    emotion: "surprise",
-                    img: "tbd",
-                },
-            ]
+            feed: [],
+            // feed: [
+            //     {
+            //         time: "11:55",
+            //         emotion: "anger",
+            //         img: "tbd",
+            //     },
+            //     {
+            //         time: "11:55",
+            //         emotion: "fear",
+            //         img: "tbd",
+            //     },
+            //     {
+            //         time: "11:55",
+            //         emotion: "contempt",
+            //         img: "tbd",
+            //     },
+            //     {
+            //         time: "11:55",
+            //         emotion: "disgust",
+            //         img: "tbd",
+            //     },
+            //     {
+            //         time: "11:55",
+            //         emotion: "surprise",
+            //         img: "tbd",
+            //     },
+            // ]
         }
     }
 
-    componentDidMount() {
-        const ws = new WebSocket("ws://opencv.fbx.im:8080/get_statistics");
-        ws.onopen = function() {
-           ws.send("get_statistics");
-        };
-        ws.onmessage = function (evt) {
-            console.log(evt.data);
-            this.setState( {
-                feed: [...this.state.feed, evt.data]
-            }, () => {
-                console.log(this.state);
+    componentWillMount() {
+        // const ws = new WebSocket("ws://opencv.fbx.im:8080/get_statistics");
+        // ws.onopen = function() {
+        //    ws.send("get_statistics");
+        // };
+        // ws.onmessage = function (evt) {
+        //     console.log(evt.data);
+        //     this.setState( {
+        //         feed: [...this.state.feed, evt.data]
+        //     }, () => {
+        //         console.log(this.state);
+        //     })
+        // };
+
+        fetch("http://opencv.fbx.im:8080/get_alerts").then(response => {
+            response.json().then(data => {
+                data = this.convertDateToString(data);
+                this.setState({
+                    feed: this.state.feed.concat(data)
+                }, () => {
+                    debugger
+                    console.log(this.state);
+                })
             })
-        };
+        })
     }
 
     simulateSocketMessage() {
@@ -87,8 +100,15 @@ export default class Feed extends React.Component {
         }
     }
 
-    convertDateToString() {
-
+    convertDateToString(data) {
+        return data.map(el => {
+            var d = new Date(el.time);
+            return {
+                emotion: el.emotion,
+                img: el.img,
+                time: d.toLocaleTimeString()
+            }
+        });
     }
 
     render() {
@@ -106,7 +126,7 @@ export default class Feed extends React.Component {
                                     <br/>
                                     <span className="image-link">Witness</span>
                                     <div className="image-wrapper">
-                                        <img className="face-tooltip" src="./frontend/assets/images/cry.jpg"/>
+                                        <img className="face-tooltip" src={item.img}/>
                                     </div>
                                 </div>
                             </div>

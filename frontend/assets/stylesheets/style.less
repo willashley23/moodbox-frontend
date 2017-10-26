@@ -138,7 +138,6 @@
 
     .mbx-score {
       width: 100%;
-      position: absolute;
       bottom: 0;
       font-size: 400px;
       font-weight: bold;
@@ -160,6 +159,7 @@
       path {
         &:hover {
           cursor: pointer;
+          z-index: 1000;
         }
       }
 
@@ -195,10 +195,11 @@
     .data-wrapper {
       .flex-row();
       position: relative;
-      bottom: 200px;
+      bottom: 100px;
     }
 
     .vr {
+      display: none;
       width: 1px;
       height: 340px;
       border-left: 2px solid white;
@@ -257,6 +258,7 @@
             z-index: 1000;
             border: 4px solid black;
             height: 500px;
+            width: 500px;
             transition: all 0.2s ease-in-out;
 
             &:after,
@@ -287,6 +289,9 @@
 
             .face-tooltip {
               margin: 0;
+              object-fit: cover;
+              height: 500px;
+              width: 500px;
             }
           }
 
