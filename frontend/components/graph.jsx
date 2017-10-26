@@ -5,8 +5,8 @@ export default class Graph extends React.Component {
 
     constructor(props) {
         super(props);
-        this.injectColors = this.injectColors.bind(this);
-        this.colors = ["#1dbb9b","#2F3953","#E56765","#ABD9D2", "#FEF7DC", "#E8B36F", "#1dbb9b"];
+        //this.injectColors = this.injectColors.bind(this);
+        this.colors = ["#1dbb9b","#2F3953","#E56765","#ABD9D2", "#FEF7DC", "#E8B36F", "#999999", "#fff"];
         this.state = {};
     }
 
@@ -26,7 +26,8 @@ export default class Graph extends React.Component {
         let sanitizedData = Object.keys(data).map(key => {
             return {
                 emotion: key,
-                value: data[key]
+                value: data[key],
+                color: this.colors.shift(),
             }
         });
         var chart = AmCharts.makeChart( "chartdiv", {
@@ -44,14 +45,21 @@ export default class Graph extends React.Component {
             "enabled": true
             }
         });
+
+        this.setState({chart: chart});
     }
 
-    injectColors() {
-        this.colors.reverse();
-        this.state.data.forEach(el => {
-            el.color = this.colors.pop();
-        })
-    }
+    // injectColors() {
+    //     this.colors.reverse();
+    //     Object.keys(this.state.data).map(el => {
+    //         return(
+    //             {
+    //
+    //             }
+    //         );
+    //         el.color = this.colors.pop();
+    //     })
+    // }
 
     render() {
         return(

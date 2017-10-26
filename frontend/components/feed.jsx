@@ -5,7 +5,7 @@ export default class Feed extends React.Component {
 
     constructor(props) {
         super(props);
-        this.simulateSocketMessage = this.simulateSocketMessage.bind(this);
+        //this.simulateSocketMessage = this.simulateSocketMessage.bind(this);
         this.determineEmotionIcon = this.determineEmotionIcon.bind(this);
         this.convertDateToString = this.convertDateToString.bind(this);
         this.state = {
@@ -41,42 +41,34 @@ export default class Feed extends React.Component {
     }
 
     componentWillMount() {
-        // const ws = new WebSocket("ws://opencv.fbx.im:8080/get_statistics");
-        // ws.onopen = function() {
-        //    ws.send("get_statistics");
-        // };
-        // ws.onmessage = function (evt) {
-        //     console.log(evt.data);
-        //     this.setState( {
-        //         feed: [...this.state.feed, evt.data]
-        //     }, () => {
-        //         console.log(this.state);
-        //     })
-        // };
-
         fetch("http://opencv.fbx.im:8080/get_alerts").then(response => {
             response.json().then(data => {
                 data = this.convertDateToString(data);
                 this.setState({
                     feed: this.state.feed.concat(data)
                 }, () => {
-                    debugger
                     console.log(this.state);
                 })
             })
         })
     }
 
-    simulateSocketMessage() {
-        let newData = [
-            {time: "12:14", emotion: "Fierce"}
-        ];
-
-        this.setState( {
-            feed: [...this.state.feed, newData[0]]
-        }, () => {
-            console.log(this.state);
-        })
+    componentDidMount() {
+        setInterval(() => {
+            fetch("http://opencv.fbx.im:8080/get_alerts").then(response => {
+                let that = this;
+                response.json().then(data => {
+                    if (that.state.feed.slice(-1)[0].img !== data.slice(-1)[0].img) {
+                        data = this.convertDateToString(data);
+                        this.setState({
+                            feed: this.state.feed.concat(data.slice(-1))
+                        }, () => {
+                            console.log(this.state);
+                        })
+                    }
+                })
+            })
+        }, 5000)
     }
 
     determineEmotionIcon(item) {
