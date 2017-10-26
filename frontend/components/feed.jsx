@@ -1,35 +1,38 @@
 import React from 'react';
+import Websocket from 'react-websocket'
 
 export default class Feed extends React.Component {
 
     constructor(props) {
         super(props);
         this.simulateSocketMessage = this.simulateSocketMessage.bind(this);
+        this.determineEmotionIcon = this.determineEmotionIcon.bind(this);
+        this.convertDateToString = this.convertDateToString.bind(this);
         this.state = {
             feed: [
                 {
                     time: "11:55",
-                    emotion: "Angry",
+                    emotion: "anger",
                     img: "tbd",
                 },
                 {
                     time: "11:55",
-                    emotion: "Sad",
+                    emotion: "fear",
                     img: "tbd",
                 },
                 {
                     time: "11:55",
-                    emotion: "Tragic",
+                    emotion: "contempt",
                     img: "tbd",
                 },
                 {
                     time: "11:55",
-                    emotion: "Grumpy",
+                    emotion: "disgust",
                     img: "tbd",
                 },
                 {
                     time: "11:55",
-                    emotion: "Joyous",
+                    emotion: "surprise",
                     img: "tbd",
                 },
             ]
@@ -37,8 +40,18 @@ export default class Feed extends React.Component {
     }
 
     componentDidMount() {
-        // Get last 5 writes
-        // Set up web socket listener
+        const ws = new WebSocket("ws://opencv.fbx.im:8080/get_statistics");
+        ws.onopen = function() {
+           ws.send("get_statistics");
+        };
+        ws.onmessage = function (evt) {
+            console.log(evt.data);
+            this.setState( {
+                feed: [...this.state.feed, evt.data]
+            }, () => {
+                console.log(this.state);
+            })
+        };
     }
 
     simulateSocketMessage() {
@@ -53,15 +66,40 @@ export default class Feed extends React.Component {
         })
     }
 
+    determineEmotionIcon(item) {
+        switch  (item) {
+            case "anger":
+                return "./frontend/assets/images/anger.svg";
+            case "contempt":
+                return "./frontend/assets/images/contempt.svg";
+            case "disgust":
+                return "./frontend/assets/images/disgust.svg";
+            case "fear":
+                return "./frontend/assets/images/fear.svg";
+            case "happiness":
+                return "./frontend/assets/images/happiness.svg";
+            case "neutral":
+                return "./frontend/assets/images/neutral.svg";
+            case "sadness":
+                return "./frontend/assets/images/sadness.svg";
+            case "surprise":
+                return "./frontend/assets/images/surprise.svg";
+
+        }
+    }
+
+    convertDateToString() {
+
+    }
+
     render() {
         return (
             <div className="feed-container">
-                <button onClick={this.simulateSocketMessage}>test socket</button>
                 {
                     this.state.feed.map( item => {
                         return(
                             <div className="feed-item">
-                                <img src="./frontend/assets/images/frown.png" alt=""/>
+                                <img src={this.determineEmotionIcon(item.emotion)} alt=""/>
                                 <div className="feed-details">
                                     <span className="feed-item-timestamp">{item.time}</span>
                                     <span>&#8226;</span>
